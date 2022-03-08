@@ -1,0 +1,23 @@
+
+<hr>
+<h1>Projects</h1>
+<hr>
+<ul>
+    {% for project in projects %}
+        <li>Name: <a href="{% url 'project' project.id %}">{{project.title}}</a></li>
+        <ul>{{project.description}}</ul>
+    {% endfor %}
+</ul>
+<hr>
+<h1>Projects Template</h1>
+<h2>{{ msg }}</h2>
+
+{% if num > 10 %}
+<p>Number is greater then 10</p>
+
+{% else %}
+<p>Number less then 10</p>
+{% endif %}
+<hr>
+<h1>Projects</h1>
+
