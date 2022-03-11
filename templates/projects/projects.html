@@ -1,23 +1,26 @@
+{% extends 'main.html' %}
 
-<hr>
+{% block content %}
 <h1>Projects</h1>
-<hr>
-<ul>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Project</th>
+        <th>Votes</th>
+        <th>Ratio</th>
+        <th>created</th>
+        <th>Link</th>
+    </tr>
     {% for project in projects %}
-        <li>Name: <a href="{% url 'project' project.id %}">{{project.title}}</a></li>
-        <ul>{{project.description}}</ul>
+        <tr>
+            <td>{{project.id}}</td>
+            <td>{{project.title}}</td>
+            <td>{{project.vote_total}}</td>
+            <td>{{project.vote_ratio}}</td>
+            <td>{{project.created}}</td>
+            <td><a href="{% url 'project' project.id %}">view</a></td>
+        </tr>
     {% endfor %}
-</ul>
+</table>
 <hr>
-<h1>Projects Template</h1>
-<h2>{{ msg }}</h2>
-
-{% if num > 10 %}
-<p>Number is greater then 10</p>
-
-{% else %}
-<p>Number less then 10</p>
-{% endif %}
-<hr>
-<h1>Projects</h1>
-
+{% endblock content %}
