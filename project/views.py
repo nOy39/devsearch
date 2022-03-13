@@ -9,7 +9,7 @@ from django.conf import settings
 def projects(request):
     projects = Project.objects.all()
     context = {'projects': projects}
-    return render(request, 'projects/projects.html', context)
+    return render(request, 'project/projects.html', context)
 
 
 def project(request, pk):
@@ -17,7 +17,7 @@ def project(request, pk):
     tags = project_obj.tags.all()
     print(settings.MEDIA_ROOT)
     print(tags)
-    return render(request, 'projects/single-project.html', {'project': project_obj, 'tags': tags})
+    return render(request, 'project/single-project.html', {'project': project_obj, 'tags': tags})
 
 
 def createProject(request):
@@ -29,7 +29,7 @@ def createProject(request):
             form.save()
             return redirect('projects')
     context = {'form': form}
-    return render(request, 'projects/project_form.html', context)
+    return render(request, 'project/project_form.html', context)
 
 
 def updateProject(request, pk):
@@ -42,7 +42,7 @@ def updateProject(request, pk):
             form.save()
             return redirect('projects')
     context = {'form': form}
-    return render(request, 'projects/project_form.html', context)
+    return render(request, 'project/project_form.html', context)
 
 
 def deleteObject(request, pk):
@@ -51,4 +51,4 @@ def deleteObject(request, pk):
         project.delete()
         return redirect('projects')
     context = {'object': project}
-    return render(request, 'projects/delete_object.html', context)
+    return render(request, 'project/delete_object.html', context)
