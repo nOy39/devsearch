@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Project
 from .forms import ProjectForm
+from django.conf import settings
 
 
 def projects(request):
@@ -14,6 +15,7 @@ def projects(request):
 def project(request, pk):
     project_obj = Project.objects.get(id=pk)
     tags = project_obj.tags.all()
+    print(settings.MEDIA_ROOT)
     print(tags)
     return render(request, 'projects/single-project.html', {'project': project_obj, 'tags': tags})
 
@@ -22,7 +24,7 @@ def createProject(request):
     form = ProjectForm()
 
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('projects')
@@ -35,7 +37,7 @@ def updateProject(request, pk):
     form = ProjectForm(instance=project)
 
     if request.method == 'POST':
-        form = ProjectForm(request.POST, instance=project)
+        form = ProjectForm(request.POST, request.FILES, instance=project)
         if form.is_valid():
             form.save()
             return redirect('projects')
